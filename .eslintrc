@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json.schemastore.org/eslintrc",
+  "extends": [
+    "plugin:unicorn/recommended",
+    "eslint:recommended",
+    "prettier",
+    "plugin:prettier/recommended"
+  ],
+  "env": {
+    "node": true,
+    "es2024": true
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": "latest"
+  },
+  "rules": {
+    "prefer-const": "error"
+  },
+  "plugins": ["unicorn", "prettier", "node"],
+  "overrides": [
+    {
+      "files": ["src/__tests__/**"],
+      "plugins": ["jest"],
+      "extends": ["plugin:jest/recommended"],
+      "rules": {
+        "jest/no-identical-title": "error"
+      }
+    }
+  ]
+}

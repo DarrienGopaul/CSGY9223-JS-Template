@@ -1,0 +1,30 @@
+{
+  "name": "dg3314-JS-Template",
+  "version": "version 1.0.0",
+  "description": "JS Template Repository",
+  "main": "index.js",
+  "repository": "https://github.com/DarrienGopaul/JS-Template.git",
+  "type": "module",
+  "author": "Darrien Gopaul",
+  "license": "MIT",
+  "private": "false",
+  "scripts": {
+    "test": "jest",
+    "test:ci": "jest --ci --reporters='default' --reporters='./tests/infra/githubActionsReporter'",
+    "lint": "eslint --ext=.js --ignore-path=.gitignore src"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.23.0",
+    "@babel/core": "^7.23.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.23.0",
+    "babel-jest": "^29.7.0",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-jest": "^27.4.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-unicorn": "^48.0.1",
+    "jest": "^29.7.0",
+    "prettier": "^3.0.3"
+  }
+}
