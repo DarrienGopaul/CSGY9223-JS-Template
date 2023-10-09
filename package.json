@@ -1,16 +1,16 @@
 {
-  "name": "dg3314-JS-Template",
+  "name": "CSGY9223-JS-Template",
   "version": "version 1.0.0",
-  "description": "JS Template Repository",
+  "description": "JavaScript Template",
   "main": "index.js",
-  "repository": "https://github.com/DarrienGopaul/JS-Template.git",
+  "repository": "https://github.com/DarrienGopaul/CSGY9223-JS-Template.git",
   "type": "module",
   "author": "Darrien Gopaul",
   "license": "MIT",
   "private": "false",
   "scripts": {
     "test": "jest",
-    "test:ci": "jest --ci --reporters='default' --reporters='./tests/infra/githubActionsReporter'",
+    "test:ci": "jest --ci --reporters=default --reporters=./tests/infra/github-actions-reporter.js",
     "lint": "eslint --ext=.js --ignore-path=.gitignore src"
   },
   "devDependencies": {
