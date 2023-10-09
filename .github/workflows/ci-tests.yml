@@ -3,6 +3,9 @@ name: CI Tests
 on:
   pull_request:
     types: [opened, reopened, synchronize]
+    
+  push:
+    branches: [ "main" ]
   # If we need to run the tests on every commit to main, we must add another trigger
 
 jobs:
