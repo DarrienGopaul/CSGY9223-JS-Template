@@ -1,0 +1,172 @@
+Leader Routes:
+
+  /leader/createEvent:
+    A Leader can create new events in a Discord server.
+
+    Params:
+      user_id
+      event_name
+      event_start
+      event_end
+
+    Modifies Event Collection:
+      event_id (string)
+      event_name (string)
+      event_start (timestamp)
+      event_end (timestamp)
+      admin_id (string)
+      queue_id (string)
+      roles (list<string>)
+      details (string)
+
+    Modifies Queue Collection:
+      queue_id (string)
+      event_id (string)
+      participants (list<user_id>)
+      role_capacity (dictionary<role:int>)
+      capacity
+
+  /leader/cancelEvent:
+    A leader can cancel events in a Discord server.
+
+    Params:
+      admin_id
+      event_id
+
+    Deletes Event Collection:
+      event_id (string)
+      event_name (string)
+      event_start (timestamp)
+      event_end (timestamp)
+      admin_id (string)
+      queue_id (string)
+      roles (list<string>)
+      details (string)
+
+  /leader/addEventRole:
+    A Leader can add a new player role to the queue
+
+    Params:
+      admin_id
+      event_id
+      role
+      capacity
+
+    Modifies Queue Collection:
+      queue_id (string)
+      event_id (string)
+      participants (list<user_id>)
+      role_capacity (dictionary<role:int>)
+      capacity
+
+  /leader/removeEventRole:
+    A Leader can remove an existing player from to the queue
+
+    Params:
+      admin_id
+      event_id
+      role
+
+    Modifies Queue Collection:
+      queue_id (string)
+      event_id (string)
+      participants (list<user_id>)
+      role_capacity (dictionary<role:int>)
+      capacity
+
+  /leader/getQueueInfo:
+    A Participant can request the queue information for their event.
+    Queue information includes all roles, queue capacity per role, and total participants in queue.
+
+    Modifies Queue Collection:
+      queue_id (string)
+      event_id (string)
+      participants (list<user_id>)
+      role_capacity (dictionary<role:int>)
+      capacity
+
+  /ledaer/createParty:
+    A Leader can pull Participants from the event queue to form a party for their event.
+
+    Params:
+      admin_id
+      event_id
+
+    Reads Queue Collection:
+      queue_id (string)
+      event_id (string)
+      participants (list<user_id>)
+      role_capacity (dictionary<role:int>)
+      capacity
+
+Participant Routes:
+
+  /participant/joinEvent:
+    A Member of the Discord server can join events as a Participant.
+
+    Params:
+      user_id
+      event_id
+      role
+
+    Modifies Queue Collection:
+      queue_id (string)
+      event_id (string)
+      participants (list<user_id>)
+      role_capacity (dictionary<role:int>)
+      capacity
+
+  /participant/leaveEvent:
+    A Participant can leave events and are removed from the event queue.
+
+    Params:
+      user_id
+      event_id
+
+    Modifies Queue Collection:
+      queue_id (string)
+      event_id (string)
+      participants (list<user_id>)
+      role_capacity (dictionary<role:int>)
+      capacity
+
+  /participant/getQueueInfo:
+    A Participant can request their queue information for a certain event at any time.
+    Queue information includes all roles, queue capacity per role, total participants in queue, and the Participant's role and queue position.
+
+    Params:
+      user_id
+      event_id
+
+    Reads Event Collection:
+      event_id (string)
+      event_name (string)
+      event_start (timestamp)
+      event_end (timestamp)
+      admin_id (string)
+      queue_id (string)
+      roles (list<string>)
+      details (string)
+
+    Reads Queue Collection:
+      queue_id (string)
+      event_id (string)
+      participants (list<user_id>)
+      role_capacity (dictionary<role:int>)
+      capacity
+
+
+  /participant/changeRole:
+    A participant can change roles, which will remove them from their current role queue and add them to another.
+
+    Params:
+      user_id
+      event_id
+      role
+
+    Modifies Queue Collection:
+      queue_id (string)
+      event_id (string)
+      participants (list<user_id>)
+      role_capacity (dictionary<role:int>)
+      capacity
