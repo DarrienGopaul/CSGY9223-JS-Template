@@ -8,8 +8,12 @@ app.use(express.json());
 app.use(require('./routes/leader'));
 app.use(require('./routes/participant'));
 
-const dbo = require('./db/conn');
+const listRoutes = require('express-list-routes');
+console.log('\n ---------------- ALL ROUTES (START) ---------------- \n');
+console.log(listRoutes(app));
+console.log('\n ---------------- ALL ROUTES (END) ---------------- \n');
 
+const dbo = require('./db/conn');
 const path = require('path');
 
 app.listen(port, () => {
