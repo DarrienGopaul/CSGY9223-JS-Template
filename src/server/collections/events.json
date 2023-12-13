@@ -1,0 +1,102 @@
+{
+  "_id": {
+    "$oid": "657a14627aa319dd2b35482a"
+  },
+  "admin_id": {
+    "$oid": "657a0e4a0b75c1c94704e421"
+  },
+  "roles": [
+    "tank",
+    "healer",
+    "damage dealer"
+  ],
+  "role_capacity": {
+    "tank": {
+      "$numberInt": "1"
+    },
+    "healer": {
+      "$numberInt": "1"
+    },
+    "damage dealer": {
+      "$numberInt": "1"
+    }
+  },
+  "role_size": {
+    "tank": {
+      "$numberInt": "1"
+    },
+    "healer": {
+      "$numberInt": "1"
+    },
+    "damage dealer": {
+      "$numberInt": "1"
+    }
+  },
+  "total_capacity": {
+    "$numberInt": "3"
+  },
+  "total_size": {
+    "$numberInt": "3"
+  },
+  "party": [
+    {
+      "user_id": {
+        "$oid": "657a0e4a0b75c1c94704e421"
+      },
+      "role": "tank"
+    },
+    {
+      "user_id": {
+        "$oid": "657a0e690b75c1c94704e422"
+      },
+      "role": "healer"
+    },
+    {
+      "user_id": {
+        "$oid": "657a0f9d0b75c1c94704e423"
+      },
+      "role": "damage dealer"
+    }
+  ],
+  "queue": [
+    {
+      "user_id": {
+        "$oid": "657a0e4a0b75c1c94704e421"
+      },
+      "role": "tank",
+      "position": {
+        "$numberInt": "1"
+      }
+    },
+    {
+      "user_id": {
+        "$oid": "657a0e690b75c1c94704e422"
+      },
+      "role": "healer",
+      "position": {
+        "$numberInt": "1"
+      }
+    },
+    {
+      "user_id": {
+        "$oid": "657a0f9d0b75c1c94704e423"
+      },
+      "role": "damage dealer",
+      "position": {
+        "$numberInt": "1"
+      }
+    }
+  ],
+  "description": "Greetings, champions of Azeroth! Prepare for an unforgettable gaming experience as we present, Azerothian Rumble: Clash of the Factions, a thrilling World of Warcraft event that transcends the borders of the virtual realm.",
+  "end": {
+    "$date": {
+      "$numberLong": "1703120400000"
+    }
+  },
+  "name": "Azerothian Rumble: Clash of the Factions",
+  "start": {
+    "$date": {
+      "$numberLong": "1703109600000"
+    }
+  }
+}
