@@ -18,6 +18,7 @@ Leader Routes:
       queue_id (string)
       roles (list<string>)
       details (string)
+      party (dict<role:list<user_id>>)
 
     Modifies Queue Collection:
       queue_id (string)
@@ -42,6 +43,7 @@ Leader Routes:
       queue_id (string)
       roles (list<string>)
       details (string)
+      party (dict<role:list<user_id>>)
 
   /leader/addEventRole:
     A Leader can add a new player role to the queue
@@ -74,7 +76,7 @@ Leader Routes:
       role_capacity (dictionary<role:int>)
       capacity
 
-  /leader/getQueueInfo:
+  /leader/getEventInfo:
     A Participant can request the queue information for their event.
     Queue information includes all roles, queue capacity per role, and total participants in queue.
 
@@ -98,6 +100,18 @@ Leader Routes:
       participants (list<user_id>)
       role_capacity (dictionary<role:int>)
       capacity
+
+    Modifies Event Collection:
+      event_id (string)
+      event_name (string)
+      event_start (timestamp)
+      event_end (timestamp)
+      admin_id (string)
+      queue_id (string)
+      roles (list<string>)
+      details (string)
+      party (dict<role:list<user_id>>)
+
 
 Participant Routes:
 
@@ -130,7 +144,7 @@ Participant Routes:
       role_capacity (dictionary<role:int>)
       capacity
 
-  /participant/getQueueInfo:
+  /participant/getEventInfo:
     A Participant can request their queue information for a certain event at any time.
     Queue information includes all roles, queue capacity per role, total participants in queue, and the Participant's role and queue position.
 
@@ -147,6 +161,7 @@ Participant Routes:
       queue_id (string)
       roles (list<string>)
       details (string)
+      party (dict<role:list<user_id>>)
 
     Reads Queue Collection:
       queue_id (string)
