@@ -5,6 +5,10 @@
   "admin_id": {
     "$oid": "657a0e4a0b75c1c94704e421"
   },
+  "name": "Azerothian Rumble: Clash of the Factions",
+  "description": "Greetings, champions of Azeroth! Prepare for an unforgettable gaming experience as we present, Azerothian Rumble: Clash of the Factions, a thrilling World of Warcraft event that transcends the borders of the virtual realm.",
+  "start": "Wed Dec 20 2023 17:00:42 GMT-0500 (GMT-05:00)",
+  "end": "Wed Dec 20 2023 20:00:42 GMT-0500 (GMT-05:00)",
   "roles": [
     "tank",
     "healer",
@@ -21,6 +25,9 @@
       "$numberInt": "1"
     }
   },
+  "total_capacity": {
+    "$numberInt": "3"
+  },
   "role_size": {
     "tank": {
       "$numberInt": "1"
@@ -32,32 +39,9 @@
       "$numberInt": "1"
     }
   },
-  "total_capacity": {
-    "$numberInt": "3"
-  },
   "total_size": {
     "$numberInt": "3"
   },
-  "party": [
-    {
-      "user_id": {
-        "$oid": "657a0e4a0b75c1c94704e421"
-      },
-      "role": "tank"
-    },
-    {
-      "user_id": {
-        "$oid": "657a0e690b75c1c94704e422"
-      },
-      "role": "healer"
-    },
-    {
-      "user_id": {
-        "$oid": "657a0f9d0b75c1c94704e423"
-      },
-      "role": "damage dealer"
-    }
-  ],
   "queue": [
     {
       "user_id": {
@@ -87,16 +71,24 @@
       }
     }
   ],
-  "description": "Greetings, champions of Azeroth! Prepare for an unforgettable gaming experience as we present, Azerothian Rumble: Clash of the Factions, a thrilling World of Warcraft event that transcends the borders of the virtual realm.",
-  "end": {
-    "$date": {
-      "$numberLong": "1703120400000"
+  "party": [
+    {
+      "user_id": {
+        "$oid": "657a0e4a0b75c1c94704e421"
+      },
+      "role": "tank"
+    },
+    {
+      "user_id": {
+        "$oid": "657a0e690b75c1c94704e422"
+      },
+      "role": "healer"
+    },
+    {
+      "user_id": {
+        "$oid": "657a0f9d0b75c1c94704e423"
+      },
+      "role": "damage dealer"
     }
-  },
-  "name": "Azerothian Rumble: Clash of the Factions",
-  "start": {
-    "$date": {
-      "$numberLong": "1703109600000"
-    }
-  }
+  ]
 }
