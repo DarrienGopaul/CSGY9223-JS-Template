@@ -125,12 +125,56 @@ leaderRoutes.route('/leader/changeEventEnd').post(function (req, response) {
       });
 })
 
-leaderRoutes.route('/leader/addEventRole').post(function (req, response) {})
+leaderRoutes.route('/leader/addEventRole').put(function (req, response) {
+  console.log(req.body);
 
-leaderRoutes.route('/leader/removeEventRole').put(function (req, response) {})
+  const dbConnect = dbo.getDb()
+  const query = {_id: ObjectId(req.body.event_id), admin_id: ObjectId(req.body.admin_id)};
 
-leaderRoutes.route('/leader/changeEventRoleCapacity').post(function (req, response) {})
+  const update = {
+    $push: {
+      roles: req.body.role,
+    },
+    $set: {
+      [`role_capacity.${req.body.role}`]: req.body.capacity,
+      [`role_size.${req.body.role}`]: 0
+    },
+    $inc: {
+      total_capacity: req.body.capacity,
+    }
+  };
+  dbConnect.collection('Events')
+      .findOneAndUpdate(query, update, function(err, result) {
+        if (err) throw err;
+        response.json(result);
+      });
+})
 
-leaderRoutes.route('/leader/createEventParty').post(function (req, response) {})
+leaderRoutes.route('/leader/removeEventRole').put(function (req, response) {
+  console.log(req.body);
+
+  const dbConnect = dbo.getDb()
+  const query = {_id: ObjectId(req.body.event_id), admin_id: ObjectId(req.body.admin_id)};
+
+  const update = {
+    $pull: {
+      roles: req.body.role,
+    },
+    $unset: {
+      [`role_capacity.${req.body.role}`]: req.body.capacity,
+      [`role_size.${req.body.role}`]: 0
+    },
+    $inc: {
+      total_capacity: -req.body.capacity,
+    }
+  };
+  dbConnect.collection('Events')
+      .findOneAndUpdate(query, update, function(err, result) {
+        if (err) throw err;
+        response.json(result);
+      });
+})
+
+leaderRoutes.route('/leader/createEventParty').put(function (req, response) {})
 
 module.exports = leaderRoutes
