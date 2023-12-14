@@ -1,7 +1,3 @@
-/** Express router providing artist related routes
- * @module routers/participant
- * @requires express
- */
 const express = require('express');
 
 // participantRoutes is an instance of the express router.
@@ -9,33 +5,68 @@ const express = require('express');
 // The router will be added as a middleware and will
 // take control of requests starting with path /participant.
 
-/**
- * Express router to mount participant related functions on.
- * @namespace participantRoutes
- */
 const participantRoutes = express.Router();
 
 // Assists in connecting to the database
 const dbo = require('../db/conn');
 
-participantRoutes.route('/participant/joinEvent').post(function(req, response) {
+
+// This help convert the id from string to ObjectId for the _id.
+const ObjectId = require('mongodb').ObjectId;
+
+participantRoutes.route('/participant/joinEvent').put(function(req, response) {
+  console.log(req.body);
+  
   const dbConnect = dbo.getDb();
-  const query = {}
+  const query = {_id: ObjectId(req.body.event_id)};
+
+  const update = {
+    $push: {
+      queue: {user_id: ObjectId(req.body.user_id), role: req.body.role}
+    },
+    $inc: {
+      [`role_size.${req.body.role}`]: 1,
+      total_size: 1
+    }
+  };
+  dbConnect.collection('Events')
+      .findOneAndUpdate(query, update, function(err, result) {
+        if (err) throw err;
+        response.json(result);
+      });
 });
 
 participantRoutes.route('/participant/leaveEvent').put(function(req, response) {
+  console.log(req.body);
+  
   const dbConnect = dbo.getDb();
-  const query = {}
+  const query = {_id: ObjectId(req.body.event_id)};
+
+  const update = {
+    $pull: {
+      queue: {user_id: ObjectId(req.body.user_id), role: req.body.role}
+    },
+    $inc: {
+      [`role_size.${req.body.role}`]: -1,
+      total_size: -1
+    }
+  };
+  dbConnect.collection('Events')
+      .findOneAndUpdate(query, update, function(err, result) {
+        if (err) throw err;
+        response.json(result);
+      });
 });
 
 participantRoutes.route('/participant/getEventInfo').get(function(req, response) {
-  const dbConnect = dbo.getDb();
-  const query = {}
-});
+  console.log(req.body);
 
-participantRoutes.route('/participant/changeRole').put(function(req, response) {
-  const dbConnect = dbo.getDb();
-  const query = {}
+  const dbConnect = dbo.getDb()
+  const query = {_id: ObjectId(req.body.event_id)};
+  dbConnect.collection('Events').findOne(query, function(err, result) {
+    if (err) throw err;
+    response.json(result);
+  });
 });
 
 module.exports = participantRoutes;

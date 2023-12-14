@@ -47,28 +47,19 @@
       "user_id": {
         "$oid": "657a0e4a0b75c1c94704e421"
       },
-      "role": "tank",
-      "position": {
-        "$numberInt": "1"
-      }
+      "role": "tank"
     },
     {
       "user_id": {
         "$oid": "657a0e690b75c1c94704e422"
       },
-      "role": "healer",
-      "position": {
-        "$numberInt": "1"
-      }
+      "role": "healer"
     },
     {
       "user_id": {
         "$oid": "657a0f9d0b75c1c94704e423"
       },
-      "role": "damage dealer",
-      "position": {
-        "$numberInt": "1"
-      }
+      "role": "damage dealer"
     }
   ],
   "party": [

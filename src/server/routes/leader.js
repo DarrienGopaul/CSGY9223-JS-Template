@@ -49,6 +49,8 @@ leaderRoutes.route('/leader/cancelEvent').delete(function (req, response) {
 })
 
 leaderRoutes.route('/leader/getEventInfo').get(function (req, response) {
+  console.log(req.body);
+
   const dbConnect = dbo.getDb()
   const query = {_id: ObjectId(req.body.event_id), admin_id: ObjectId(req.body.admin_id)};
   dbConnect.collection('Events').findOne(query, function(err, result) {
