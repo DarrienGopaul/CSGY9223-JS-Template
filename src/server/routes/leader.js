@@ -134,7 +134,7 @@ leaderRoutes.route('/leader/addEventRole').put(function (req, response) {
   const query = {_id: ObjectId(req.body.event_id), admin_id: ObjectId(req.body.admin_id)};
 
   const update = {
-    $push: {
+    $addToSet: {
       roles: req.body.role,
     },
     $set: {
@@ -176,6 +176,8 @@ leaderRoutes.route('/leader/removeEventRole').put(function (req, response) {
         response.json(result);
       });
 })
+
+leaderRoutes.route('/leader/changeEventRoleCapacity').put(function (req, response) {})
 
 leaderRoutes.route('/leader/createEventParty').put(function (req, response) {})
 

@@ -21,8 +21,8 @@ participantRoutes.route('/participant/joinEvent').put(function(req, response) {
   const query = {_id: ObjectId(req.body.event_id)};
 
   const update = {
-    $push: {
-      queue: {user_id: ObjectId(req.body.user_id), role: req.body.role}
+    $addToSet: {
+      queue: {user_id: ObjectId(req.body.user_id), role: req.body.role, date: Date()}
     },
     $inc: {
       [`role_size.${req.body.role}`]: 1,

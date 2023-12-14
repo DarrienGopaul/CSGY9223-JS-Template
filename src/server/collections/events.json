@@ -47,19 +47,22 @@
       "user_id": {
         "$oid": "657a0e4a0b75c1c94704e421"
       },
-      "role": "tank"
+      "role": "tank",
+      "date": "Wed Dec 20 2023 17:00:42 GMT-0500 (GMT-05:00)"
     },
     {
       "user_id": {
         "$oid": "657a0e690b75c1c94704e422"
       },
-      "role": "healer"
+      "role": "healer",
+      "date": "Wed Dec 20 2023 17:00:43 GMT-0500 (GMT-05:00)"
     },
     {
       "user_id": {
         "$oid": "657a0f9d0b75c1c94704e423"
       },
-      "role": "damage dealer"
+      "role": "damage dealer",
+      "date": "Wed Dec 20 2023 17:00:44 GMT-0500 (GMT-05:00)"
     }
   ],
   "party": [
