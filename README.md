@@ -20,15 +20,17 @@ To use this template repository for your own project, follow these steps:
    cd your-new-repo
    ```
 
-4. Install project dependencies using Yarn:
+4. Install project dependencies using setup script:
 
    ```bash
-   yarn install
+   ./setup.sh
    ```
 
-5. Start adding your JavaScript code to the `src` directory. You can create new files and modules under the `src` directory as needed.
+5. Fill in your discord token and mongodb key
 
-6. To expose your modules, update the `index.js` file in the root directory. For example:
+6. Start adding your JavaScript code to the `src` directory. You can create new files and modules under the `src` directory as needed.
+
+7. To expose your modules, update the `index.js` file in the root directory. For example:
 
    ```javascript
    import * as hello from './src/hello.js';
@@ -39,6 +41,8 @@ To use this template repository for your own project, follow these steps:
      yourNewModule
    };
    ```
+
+
 
 ## Testing
 
