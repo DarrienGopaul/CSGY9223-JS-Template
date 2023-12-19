@@ -1,9 +1,12 @@
+//require('dotenv').config();
+//require('dotenv').config({ path: '.env' });
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express from 'express'; //const express = require('express');
 import cors from 'cors'; //const cors = require('cors');
-//require('dotenv').config();//require('dotenv').config({ path: '.env' });
 import leader from './routes/leader.js';
 import participant from './routes/participant.js';
-
 const app = express();
 const port = process.env.PORT || 5000;
 
