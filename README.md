@@ -2,6 +2,8 @@
 
 This is a JavaScript template repository that provides a basic structure for starting a new JavaScript project. It includes configuration for testing with Jest, linting with ESLint and Prettier, and a GitHub Actions workflow for automatically running tests on every pull request. Yarn is the package manager used for managing dependencies in this template.
 
+I modified this readme to test pull request and on github actions.
+
 ## Getting Started
 
 To use this template repository for your own project, follow these steps:

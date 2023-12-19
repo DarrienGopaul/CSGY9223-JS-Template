@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 
 // participantRoutes is an instance of the express router.
 // We use it to define our routes.
@@ -8,65 +8,81 @@ const express = require('express');
 const participantRoutes = express.Router();
 
 // Assists in connecting to the database
-const dbo = require('../db/conn');
-
+import dbo from '../db/conn.js'; //const dbo = require('../db/conn');
 
 // This help convert the id from string to ObjectId for the _id.
-const ObjectId = require('mongodb').ObjectId;
+import { ObjectId } from 'mongodb'; //const ObjectId = require('mongodb').ObjectId;
 
-participantRoutes.route('/participant/joinEvent').put(function(req, response) {
-  console.log(req.body);
-  
-  const dbConnect = dbo.getDb();
-  const query = {_id: ObjectId(req.body.event_id)};
+participantRoutes
+  .route('/participant/joinEvent')
+  .put(function (request, response) {
+    console.log(request.body);
 
-  const update = {
-    $addToSet: {
-      queue: {user_id: ObjectId(req.body.user_id), role: req.body.role, date: Date()}
-    },
-    $inc: {
-      [`role_size.${req.body.role}`]: 1,
-      total_size: 1
-    }
-  };
-  dbConnect.collection('Events')
-      .findOneAndUpdate(query, update, function(err, result) {
-        if (err) throw err;
+    const databaseConnect = dbo.getDb();
+    const query = { _id: ObjectId(request.body.event_id) };
+
+    const update = {
+      $addToSet: {
+        queue: {
+          user_id: ObjectId(request.body.user_id),
+          role: request.body.role,
+          date: new Date(),
+        },
+      },
+      $inc: {
+        [`role_size.${request.body.role}`]: 1,
+        total_size: 1,
+      },
+    };
+    databaseConnect
+      .collection('Events')
+      .findOneAndUpdate(query, update, function (error, result) {
+        if (error) throw error;
         response.json(result);
       });
-});
-
-participantRoutes.route('/participant/leaveEvent').put(function(req, response) {
-  console.log(req.body);
-  
-  const dbConnect = dbo.getDb();
-  const query = {_id: ObjectId(req.body.event_id)};
-
-  const update = {
-    $pull: {
-      queue: {user_id: ObjectId(req.body.user_id), role: req.body.role}
-    },
-    $inc: {
-      [`role_size.${req.body.role}`]: -1,
-      total_size: -1
-    }
-  };
-  dbConnect.collection('Events')
-      .findOneAndUpdate(query, update, function(err, result) {
-        if (err) throw err;
-        response.json(result);
-      });
-});
-
-participantRoutes.route('/participant/getEventInfo').get(function(req, response) {
-  console.log(req.body);
-
-  const dbConnect = dbo.getDb()
-  const query = {_id: ObjectId(req.body.event_id)};
-  dbConnect.collection('Events').findOne(query, function(err, result) {
-    if (err) throw err;
-    response.json(result);
   });
-});
 
-module.exports = participantRoutes;
+participantRoutes
+  .route('/participant/leaveEvent')
+  .put(function (request, response) {
+    console.log(request.body);
+
+    const databaseConnect = dbo.getDb();
+    const query = { _id: ObjectId(request.body.event_id) };
+
+    const update = {
+      $pull: {
+        queue: {
+          user_id: ObjectId(request.body.user_id),
+          role: request.body.role,
+        },
+      },
+      $inc: {
+        [`role_size.${request.body.role}`]: -1,
+        total_size: -1,
+      },
+    };
+    databaseConnect
+      .collection('Events')
+      .findOneAndUpdate(query, update, function (error, result) {
+        if (error) throw error;
+        response.json(result);
+      });
+  });
+
+participantRoutes
+  .route('/participant/getEventInfo')
+  .get(function (request, response) {
+    console.log(request.body);
+
+    const databaseConnect = dbo.getDb();
+    const query = { _id: ObjectId(request.body.event_id) };
+    databaseConnect
+      .collection('Events')
+      .findOne(query, function (error, result) {
+        if (error) throw error;
+        response.json(result);
+      });
+  });
+
+export default participantRoutes; //module.exports = participantRoutes;
