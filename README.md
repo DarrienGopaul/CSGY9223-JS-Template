@@ -203,6 +203,14 @@ npm start server
       GET      /participant/getEventInfo
                A participant can request their queue information for a certain event at any time.
 
+
+## Contributions
+
+* DarrienGopaul:
+* d-santiago: MongoDB Administrator and Backend Developer (Server and Routes)
+* jeffzhkw:
+* Thaileaf:
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
