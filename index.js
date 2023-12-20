@@ -25,9 +25,9 @@ client.commands = all_commands;
 
 client.on('ready', () => {
   // everything that happens when the bot is booted up
-  // dbo.connectToServer(function (error) {
-  //   if (error) console.error(error);
-  // });
+  dbo.connectToServer(function (error) {
+    if (error) console.error(error);
+  });
   console.log(`Server is running on port: ${port}`);
   console.log(`Bot has logged in as ${client.user.username}`);
 });
