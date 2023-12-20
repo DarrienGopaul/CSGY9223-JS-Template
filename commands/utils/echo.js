@@ -9,7 +9,8 @@ export default {
         .setName('input')
         .setDescription('The input to echo back')
         .setRequired(true)
-    ),
+    )
+    .toJSON(),
   async execute(interaction) {
     const input = interaction.options.getString('input');
     await interaction.reply(input + ' from echo.js!');
