@@ -1,7 +1,8 @@
 import { Client, GatewayIntentBits, REST, Routes } from 'discord.js';
 import { config } from 'dotenv';
-import dbo from './src/server/db/conn.js';
-
+import echo from './commands/echo.js';
+import ping from './commands/ping.js';
+import queue from './commands/queue.js';
 import all_commands from './commands/commands.js';
 
 // using .env file to store sensitive information
@@ -10,6 +11,13 @@ const TOKEN = process.env.DISCORD_TOKEN; // Discord Bot token obtained from Disc
 const GUILD_ID = process.env.GUILD_ID; // ID of the server where this bot will be used
 const CLIENT_ID = process.env.CLIENT_ID; // Client ID obtained from Discord Developer Portal
 const port = process.env.PORT || 5000;
+
+// TODO: should be refactored into a separate file
+const commands = [
+  // define slash commands
+  ping.data,
+  echo.data,
+];
 
 const rest = new REST({ version: '10' }).setToken(TOKEN);
 const client = new Client({
@@ -25,9 +33,9 @@ client.commands = all_commands;
 
 client.on('ready', () => {
   // everything that happens when the bot is booted up
-  dbo.connectToServer(function (error) {
-    if (error) console.error(error);
-  });
+  // dbo.connectToServer(function (error) {
+  //   if (error) console.error(error);
+  // });
   console.log(`Server is running on port: ${port}`);
   console.log(`Bot has logged in as ${client.user.username}`);
 });
