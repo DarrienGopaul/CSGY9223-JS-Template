@@ -21,6 +21,8 @@ if [ -d "src/server" ]; then
         touch .env
         echo "ATLAS_URI=your_connection_string" >> .env
 	echo "DISCORD_TOKEN=your_discord_token" >> .env
+	echo "GUILD_ID=your_discord_server_id" >> .env
+	echo "CLIENT_ID=your_discord_client_id" >> .env
 	echo "Created .env file!"
     fi
 else
