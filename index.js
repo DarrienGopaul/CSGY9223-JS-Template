@@ -1,8 +1,7 @@
 import { Client, GatewayIntentBits, REST, Routes } from 'discord.js';
 import { config } from 'dotenv';
-import echo from './commands/echo.js';
-import ping from './commands/ping.js';
-import queue from './commands/queue.js';
+import all_commands from './commands/commands.js';
+import dbo from './src/server/db/conn.js';
 
 // using .env file to store sensitive information
 config();
@@ -10,14 +9,6 @@ const TOKEN = process.env.DISCORD_TOKEN; // Discord Bot token obtained from Disc
 const GUILD_ID = process.env.GUILD_ID; // ID of the server where this bot will be used
 const CLIENT_ID = process.env.CLIENT_ID; // Client ID obtained from Discord Developer Portal
 const port = process.env.PORT || 5000;
-
-// TODO: should be refactored into a separate file
-const commands = [
-  // define slash commands
-  ping.data,
-  echo.data,
-];
-
 const rest = new REST({ version: '10' }).setToken(TOKEN);
 const client = new Client({
   // declare intents that the bot(client) would need to access
@@ -28,11 +19,13 @@ const client = new Client({
   ],
 });
 
+client.commands = all_commands;
+
 client.on('ready', () => {
   // everything that happens when the bot is booted up
-  // dbo.connectToServer(function (error) {
-  //   if (error) console.error(error);
-  // });
+  dbo.connectToServer(function (error) {
+    if (error) console.error(error);
+  });
   console.log(`Server is running on port: ${port}`);
   console.log(`Bot has logged in as ${client.user.username}`);
 });
@@ -40,21 +33,29 @@ client.on('ready', () => {
 // interaction has type: ChatInputCommandInteraction
 // https://old.discordjs.dev/#/docs/discord.js/main/class/ChatInputCommandInteraction
 client.on('interactionCreate', async interaction => {
+  // defines the action to take when user enters /ping
   if (!interaction.isChatInputCommand()) return;
 
-  // defines the action to take when user enters /ping
-  console.log(interaction);
+  const command = interaction.client.commands.get(interaction.commandName);
 
-  if (interaction.commandName === 'ping') {
-    await ping.execute(interaction);
+  if (!command) {
+    console.error(`No command matching ${interaction.commandName} was found.`);
+    return;
   }
 
-  if (interaction.commandName === 'echo') {
-    await echo.execute(interaction);
-  }
-
-  if (interaction.commandName === 'queue') {
-    await queue.execute(interaction);
+  try {
+    await command.execute(interaction);
+  } catch (error) {
+    console.error(error);
+    await (interaction.replied || interaction.deferred
+      ? interaction.followUp({
+          content: 'There was an error while executing this command!',
+          ephemeral: true,
+        })
+      : interaction.reply({
+          content: 'There was an error while executing this command!',
+          ephemeral: true,
+        }));
   }
 });
 
@@ -62,7 +63,13 @@ async function main() {
   try {
     console.log('Starting (/) commands refresh');
     await rest.put(Routes.applicationCommands(CLIENT_ID, GUILD_ID), {
-      body: commands,
+      body: all_commands.map(command => {
+        return {
+          name: command.data.name,
+          description: command.data.description,
+          options: command.data.options,
+        };
+      }),
     });
     client.login(TOKEN);
   } catch (error) {

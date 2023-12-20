@@ -1,5 +1,4 @@
 import { SlashCommandBuilder } from '@discordjs/builders';
-import { User } from 'discord.js';
 
 export default {
   data: new SlashCommandBuilder()
@@ -8,6 +7,7 @@ export default {
       'For testing purposes, prints some user data. In the future will add a User to queue'
     ),
   async execute(interaction) {
-    await interaction.reply(`${User.displayName()} from queue.js!`);
+    console.log(interaction);
+    await interaction.reply(`${interaction.user.username} from queue.js!`);
   },
 };
