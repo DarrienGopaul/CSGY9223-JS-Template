@@ -1,48 +1,24 @@
-import {
-  Client,
-  SlashCommandBuilder,
-  GatewayIntentBits,
-  REST,
-  Routes,
-} from 'discord.js';
+import { Client, GatewayIntentBits, REST, Routes } from 'discord.js';
 import { config } from 'dotenv';
 import dbo from './src/server/db/conn.js';
+import echo from './commands/echo.js';
+import ping from './commands/ping.js';
 
+// using .env file to store sensitive information
 config();
-
 const TOKEN = process.env.DISCORD_TOKEN; // Discord Bot token obtained from Discord Developer Portal
 const GUILD_ID = process.env.GUILD_ID; // ID of the server where this bot will be used
 const CLIENT_ID = process.env.CLIENT_ID; // Client ID obtained from Discord Developer Portal
 const port = process.env.PORT || 5000;
 
-const echo_command = new SlashCommandBuilder()
-  .setName('echo')
-  .setDescription('Replies with your input!')
-  .addStringOption(option =>
-    option
-      .setName('input')
-      .setDescription('The input to echo back')
-      .setRequired(true)
-  );
-console.log(echo_command);
-
 // TODO: should be refactored into a separate file
-// client.commands = new Collection(); //  extends JavaScript's native Map class. Used to store and retrieve commands for execution efficiently.
 const commands = [
   // define slash commands
-  {
-    name: 'ping',
-    description: 'Replies with Pong!',
-  },
-  {
-    name: 'temp',
-    description: 'temp test',
-  },
-  echo_command,
+  ping.data,
+  echo.data,
 ];
 
 const rest = new REST({ version: '10' }).setToken(TOKEN);
-
 const client = new Client({
   // declare intents that the bot(client) would need to access
   intents: [
@@ -61,22 +37,20 @@ client.on('ready', () => {
   console.log(`Bot has logged in as ${client.user.username}`);
 });
 
+// interaction has type: ChatInputCommandInteraction
+// https://old.discordjs.dev/#/docs/discord.js/main/class/ChatInputCommandInteraction
 client.on('interactionCreate', async interaction => {
-  console.log(interaction);
   if (!interaction.isChatInputCommand()) return;
 
-  if (interaction.commandName === 'ping') {
-    // defines the action to take when user enters /ping
-    await interaction.reply('Pong!');
-  }
+  // defines the action to take when user enters /ping
+  console.log(interaction);
 
-  if (interaction.commandName === 'temp') {
-    await interaction.reply('temp!');
+  if (interaction.commandName === 'ping') {
+    await ping.execute(interaction);
   }
 
   if (interaction.commandName === 'echo') {
-    const input = interaction.options.getString('input');
-    await interaction.reply(input);
+    await echo.execute(interaction);
   }
 });
 
