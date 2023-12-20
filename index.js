@@ -1,15 +1,8 @@
-import {
-  Client,
-  Collection,
-  GatewayIntentBits,
-  REST,
-  Routes,
-} from 'discord.js';
+import { Client, GatewayIntentBits, REST, Routes } from 'discord.js';
 import { config } from 'dotenv';
-
 import dbo from './src/server/db/conn.js';
-import path from 'node:path';
-import fs from 'node:fs';
+
+import all_commands from './commands/commands.js';
 
 // using .env file to store sensitive information
 config();
@@ -28,40 +21,7 @@ const client = new Client({
   ],
 });
 
-//dynamic import of commands
-client.commands = new Collection();
-const foldersPath = path.join(path.resolve(), 'commands');
-const commandFolders = fs.readdirSync(foldersPath);
-console.log(foldersPath, commandFolders);
-
-for (const folder of commandFolders) {
-  const commandsPath = path.join(foldersPath, folder);
-  const commandFiles = fs
-    .readdirSync(commandsPath)
-    .filter(file => file.endsWith('.js'));
-
-  for (const file of commandFiles) {
-    const filePath = path.join(commandsPath, file);
-
-    import(filePath).then(command => {
-      console.log(`Loaded command ${file}`);
-      console.log(command.default);
-      if ('data' in command.default && 'execute' in command.default) {
-        // Set a new item in the Collection with the key as the command name and the value as the exported module
-        client.commands.set(command.default.data.name, command.default);
-      } else {
-        console.log(
-          `[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`
-        );
-      }
-    });
-  }
-}
-// const commands = [
-//   // define slash commands
-//   ping.data,
-//   echo.data,
-// ];
+client.commands = all_commands;
 
 client.on('ready', () => {
   // everything that happens when the bot is booted up
@@ -105,7 +65,13 @@ async function main() {
   try {
     console.log('Starting (/) commands refresh');
     await rest.put(Routes.applicationCommands(CLIENT_ID, GUILD_ID), {
-      body: client.commands.toJSON(),
+      body: all_commands.map(command => {
+        return {
+          name: command.data.name,
+          description: command.data.description,
+          options: command.data.options,
+        };
+      }),
     });
     client.login(TOKEN);
   } catch (error) {
