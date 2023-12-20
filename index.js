@@ -1,16 +1,53 @@
-// Require the necessary discord.js classes
-import { Client, Events, GatewayIntentBits } from 'discord.js';
-import 'dotenv';
+import { Client, GatewayIntentBits, REST, Routes } from 'discord.js';
+import { config } from 'dotenv';
 
-// Create a new client instance
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+config();
 
-// When the client is ready, run this code (only once).
-// The distinction between `client: Client<boolean>` and `readyClient: Client<true>` is important for TypeScript developers.
-// It makes some properties non-nullable.
-client.once(Events.ClientReady, readyClient => {
-  console.log(`Ready! Logged in as ${readyClient.user.tag}`);
+const TOKEN = process.env.DISCORD_TOKEN; // Discord Bot token obtained from Discord Developer Portal
+const GUILD_ID = process.env.GUILD_ID; // ID of the server where this bot will be used
+const CLIENT_ID = process.env.CLIENT_ID; // Client ID obtained from Discord Developer Portal
+
+const commands = [
+  {
+    name: 'ping',
+    description: 'Replies with Pong!',
+  },
+];
+
+const rest = new REST({ version: '10' }).setToken(TOKEN);
+
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+  ],
 });
 
-// Log in to Discord with your client's token
-client.login(process.env.DISCORD_TOKEN);
+client.on('ready', () => {
+  // everything that happens when the bot is booted up
+  // can connect to db here
+  console.log(`Bot has logged in as ${client.user.username}`);
+});
+
+client.on('interactionCreate', async interaction => {
+  if (!interaction.isChatInputCommand()) return;
+
+  if (interaction.commandName === 'ping') {
+    await interaction.reply('Pong!');
+  }
+});
+
+async function main() {
+  try {
+    console.log('Starting (/) commands refresh');
+    await rest.put(Routes.applicationCommands(CLIENT_ID, GUILD_ID), {
+      body: commands,
+    });
+    client.login(TOKEN);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+await main();
