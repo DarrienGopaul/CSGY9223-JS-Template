@@ -3,9 +3,9 @@ import { config } from 'dotenv';
 
 config();
 
-const TOKEN = process.env.DISCORD_TOKEN;
-const GUILD_ID = process.env.GUILD_ID;
-const CLIENT_ID = process.env.CLIENT_ID;
+const TOKEN = process.env.DISCORD_TOKEN; // Discord Bot token obtained from Discord Developer Portal
+const GUILD_ID = process.env.GUILD_ID; // ID of the server where this bot will be used
+const CLIENT_ID = process.env.CLIENT_ID; // Client ID obtained from Discord Developer Portal
 
 const commands = [
   {
