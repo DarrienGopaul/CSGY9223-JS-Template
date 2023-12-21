@@ -9,7 +9,7 @@ The purpose of the Discord Queue Handling Chatbot is to automate the process of 
 * DarrienGopaul: 
 * d-santiago: MongoDB Administrator and Backend Developer (Server and Routes). 
 * jeffzhkw: Discord Workflow refractor and servers integration. 
-* Thaileaf: 
+* Thaileaf: Fixed critical environment bug that prevented running process, simplified developer environment for contributing with `setup.sh` script, focused on code reviews
 
 
 ## Getting Started
@@ -59,7 +59,7 @@ The purpose of the Discord Queue Handling Chatbot is to automate the process of 
    node index.js
    ```
 
-7. Under src/server directory, start MongoDB server using
+7. Under `src/server` directory, start MongoDB server using
    ```bash
    npm start
    ```
