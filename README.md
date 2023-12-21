@@ -6,10 +6,10 @@ The purpose of the Discord Queue Handling Chatbot is to automate the process of 
 
 ## Contributions
 
-* DarrienGopaul: 
-* d-santiago: MongoDB Administrator and Backend Developer (Server and Routes). 
-* jeffzhkw: Discord Workflow refractor and servers integration. 
-* Thaileaf: Fixed critical environment bug that prevented running process, simplified developer environment for contributing with `setup.sh` script, focused on code reviews
+* DarrienGopaul: Scaffolded the Discord.js project structure, register and create Discord Bot account and server.
+* d-santiago: Created MongoDB database and JSON collection schemas. Developed Express.js /server and /routes endpoints.
+* jeffzhkw: Refractor Discord.js project to support iterative development. Integrated with MongoDB server endpoints. 
+* Thaileaf: Simplified developer environment for contributing with `setup.sh` script, focused on code reviews. 
 
 
 ## Getting Started
