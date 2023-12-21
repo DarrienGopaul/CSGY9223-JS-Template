@@ -40,9 +40,10 @@ The purpose of the Discord Queue Handling Chatbot is to automate the process of 
    vim .env
    ```
 
-4. Install project dependencies using: 
+4. Under project root directoray, install project dependencies using: 
 
    ``` bash
+   cd CSGY9223-JS-Template
    yarn install
    npm install
    ```
@@ -56,20 +57,26 @@ The purpose of the Discord Queue Handling Chatbot is to automate the process of 
 
 6. Under project root directory, start DiscordBot server using 
    ```bash
+   cd CSGY9223-JS-Template
    node index.js
    ```
-
-7. Under `src/server` directory, start MongoDB server using
+   
+7. Open a new terminal under `src/server` directory, start MongoDB server using:
    ```bash
+   cd src/server
    npm start
    ```
 
+​	Make sure no program is running at `Port 5000` on your local machine
+
+Note: the project is still work in progress, and all responses from Discord bot are right  from MongoDB endpoints.
 
 ## Testing
 
 This template includes Jest for testing your JavaScript code. Test files should be placed under the `src/__tests__` directory. You can run tests using the following command:
 
 ```bash
+cd src/server
 yarn test
 ```
 
@@ -84,12 +91,6 @@ To check for linting issues:
 
 ```bash
 yarn lint
-```
-
-To automatically fix some of the linting issues:
-
-```bash
-yarn lint:fix
 ```
 
 ## GitHub Actions
@@ -158,7 +159,7 @@ Key Terms: Server, Event, Queue, Leader, Participant, Role, Party, Pull, ChatBot
    * Javascript: Used with Node.js and Express.js frameworks to create an application server that handles requests to and from the Discord API.
 
 * Frameworks and Libraries:
-   
+  
    * Node.js: A runtime environment that allows the use of Javascript on the server side. Due to the heavy use of network communication with the Discord API, it makes use of Node’s non-blocking I/O model.
 
    * Express.js: Adds extra functionality to Node.js for building web applications.
@@ -175,48 +176,48 @@ Key Terms: Server, Event, Queue, Leader, Participant, Role, Party, Pull, ChatBot
 ## Server Endpoints
 
       Leader Endpoints:
-
+    
       POST     /leader/createEvent
                A leader can create new events in a Discord server.
-
+    
       DELETE   /leader/cancelEvent
                A leader can cancel events in a Discord server.
-
+    
       GET      /leader/getEventInfo
                A participant can request the queue information for their event.
-
+    
       PUT      /leader/changeEventName
                A leader can change the name of their event
-
+    
       PUT      /leader/changeEventDescription
                A leader can change the description for their event
-
+    
       POST     /leader/changeEventStart
                A leader can change the start time for their event
-
+    
       POST     /leader/changeEventEnd
                A leader can change the end time for their event
-
+    
       PUT      /leader/addEventRole
                A leader can add a role to their event
-
+    
       PUT      /leader/removeEventRole
                A leader can add a role to their event
-
+    
       PUT      /leader/changeEventRoleCapacity
                A leader can change the event role capacity for their event
-
+    
       PUT      /leader/createEventParty
                A leader can pull Participants from the event queue to form a party for their event.
-
+    
       Participant Endpoints:
-
+    
       PUT      /participant/joinEvent
                A member of the Discord server can join events as a participant.
-
+    
       PUT      /participant/leaveEvent
                A participant can leave events and are removed from the event queue.
-
+    
       GET      /participant/getEventInfo
                A participant can request their queue information for a certain event at any time.
 
@@ -249,7 +250,7 @@ Key Terms: Server, Event, Queue, Leader, Participant, Role, Party, Pull, ChatBot
    ```javascript
    import * as hello from './src/hello.js';
    import * as yourNewModule from './src/yourNewModule.js'
-
+   
    export default {
      hello,
      yourNewModule
