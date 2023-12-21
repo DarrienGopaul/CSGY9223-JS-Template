@@ -14,7 +14,7 @@ import dbo from '../db/conn.js'; //const dbo = require('./db/conn');
 import { ObjectId } from 'mongodb'; //const ObjectId = require('mongodb').ObjectId;
 
 leaderRoutes.route('/leader/createEvent').post(function (request, response) {
-  console.log(request.body);
+  console.log('in create event' + request.body.admin_id);
 
   const databaseConnect = dbo.getDb();
   const object = {
@@ -40,6 +40,7 @@ leaderRoutes.route('/leader/createEvent').post(function (request, response) {
     .collection('Events')
     .insertOne(object, function (error, result) {
       if (error) throw error;
+      console.log(result);
       response.json(result);
     });
 });

@@ -11,7 +11,7 @@ console.log(`Loading commands from ${commandFolders}`);
 
 for (const commnadFilename of commandFolders) {
   const filePath = path.join(foldersPath, commnadFilename);
-
+  console.log(filePath);
   await import(filePath).then(command => {
     //console.log(`Loaded command ${commnadFilename}`);
     //console.log(command.default);
