@@ -30,7 +30,7 @@ leaderRoutes.route('/leader/createEvent').post(function (request, response) {
       0
     ),
     role_size: Object.fromEntries(
-      Object.entries(request.body.role_capacity).map(([key, value]) => [key, 0])
+      Object.entries(request.body.role_capacity).map(([key, ]) => [key, 0])
     ),
     total_size: 0,
     queue: [],
@@ -221,12 +221,12 @@ leaderRoutes.route('/leader/removeEventRole').put(function (request, response) {
     });
 });
 
-leaderRoutes
-  .route('/leader/changeEventRoleCapacity')
-  .put(function (request, response) {});
+// leaderRoutes
+//   .route('/leader/changeEventRoleCapacity')
+//   .put(function (request, response) {});
 
-leaderRoutes
-  .route('/leader/createEventParty')
-  .put(function (request, response) {});
+// leaderRoutes
+//   .route('/leader/createEventParty')
+//   .put(function (request, response) {});
 
 export default leaderRoutes; //module.exports = leaderRoutes;
