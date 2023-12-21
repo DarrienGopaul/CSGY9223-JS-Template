@@ -4,6 +4,99 @@ This project was generated from a JavaScript template repository that provides a
 
 The purpose of the Discord Queue Handling Chatbot is to automate the process of choosing members to participate in MMORPG (multiplayer online role-playing game) events of varying types (different games and player role) and sizes (tournament versus casual game). With this ChatBot, a user can create event cards, posts containing important information about a game event, and share it with groups across the Discord server. Members of these groups can join the event under different MMORPG player roles types and be added to a role-classified event queue. Shortly before an event begins, the event organizer can create an event party, consisting of participants who joined the event queue, selected by the role and order in which they joined. This facilitates an unbiased selection system.
 
+## Contributions
+
+* DarrienGopaul: 
+* d-santiago: MongoDB Administrator and Backend Developer (Server and Routes). 
+* jeffzhkw: Discord Workflow refractor and servers integration. 
+* Thaileaf: 
+
+
+## Getting Started
+
+
+1. Clone the current repository to your local machine:
+
+   ```bash
+   git clone https://github.com/DarrienGopaul/CSGY9223-JS-Template.git
+   ```
+
+2. Navigate to the cloned repository:
+
+   ```bash
+   cd CSGY9223-JS-Template
+   ```
+
+3. Create `.env` files under project root directory and in `src/server` directory.
+
+   Modity the content of `.env` files by filling in your Discord token and MongoDB key according to the report submitted on BrightSpace.
+
+   ```bash
+   cd CSGY9223-JS-Template
+   touch .env 
+   vim .env
+   cd src/server
+   touch .env
+   vim .env
+   ```
+
+4. Install project dependencies using: 
+
+   ``` bash
+   yarn install
+   npm install
+   ```
+
+5. Install additional dependencies for MongoDB using: 
+
+   ```bash
+   cd src/server
+   npm install
+   ```
+
+6. Under project root directory, start DiscordBot server using 
+   ```bash
+   node index.js
+   ```
+
+7. Under src/server directory, start MongoDB server using
+   ```bash
+   npm start
+   ```
+
+
+## Testing
+
+This template includes Jest for testing your JavaScript code. Test files should be placed under the `src/__tests__` directory. You can run tests using the following command:
+
+```bash
+yarn test
+```
+
+Jest will automatically discover and run all test files under `src/__tests__`.
+
+
+## Linting
+
+This template uses ESLint and Prettier for code linting and formatting. It also includes the `eslint-plugin-unicorn` for additional linting rules. You can check and fix linting issues using the following commands:
+
+To check for linting issues:
+
+```bash
+yarn lint
+```
+
+To automatically fix some of the linting issues:
+
+```bash
+yarn lint:fix
+```
+
+## GitHub Actions
+
+A GitHub Actions workflow is included in this template that runs the tests on every pull request. You don't need to configure anything for this to work; it's set up to run automatically.
+
+
 ## Functional Requirements
 
 Key Terms: Server, Event, Queue, Leader, Participant, Role, Party, Pull, ChatBot.
@@ -78,82 +171,6 @@ Key Terms: Server, Event, Queue, Leader, Participant, Role, Party, Pull, ChatBot
 
    * Discord API:
 
-## Getting Started
-
-To use this template repository for your own project, follow these steps:
-
-1. Clone your new repository to your local machine:
-
-   ```bash
-   git clone https://github.com/your-username/your-new-repo.git
-   ```
-
-1. Navigate to the cloned repository:
-
-   ```bash
-   cd your-new-repo
-   ```
-
-2. Install project dependencies using setup script:
-
-   ```bash
-   ./setup.sh
-   ```
-
-4. Fill in your Discord token and MongoDB key
-
-5. Start adding your JavaScript code to the `src` directory. You can create new files and modules under the `src` directory as needed.
-
-6. To expose your modules, update the `index.js` file in the root directory. For example:
-
-   ```javascript
-   import * as hello from './src/hello.js';
-   import * as yourNewModule from './src/yourNewModule.js'
-
-   export default {
-     hello,
-     yourNewModule
-   };
-   ```
-
-## Testing
-
-This template includes Jest for testing your JavaScript code. Test files should be placed under the `src/__tests__` directory. You can run tests using the following command:
-
-```bash
-yarn test
-```
-
-Jest will automatically discover and run all test files under `src/__tests__`.
-
-## Linting
-
-This template uses ESLint and Prettier for code linting and formatting. It also includes the `eslint-plugin-unicorn` for additional linting rules. You can check and fix linting issues using the following commands:
-
-To check for linting issues:
-
-```bash
-yarn lint
-```
-
-To automatically fix some of the linting issues:
-
-```bash
-yarn lint:fix
-```
-
-## GitHub Actions
-
-A GitHub Actions workflow is included in this template that runs the tests on every pull request. You don't need to configure anything for this to work; it's set up to run automatically.
-
-## To Start MongoDB Server
-
-### Server
-
-```
-cd /src/server
-npm start server
-```
 
 ## Server Endpoints
 
@@ -204,12 +221,40 @@ npm start server
                A participant can request their queue information for a certain event at any time.
 
 
-## Contributions
 
-* DarrienGopaul:
-* d-santiago: MongoDB Administrator and Backend Developer (Server and Routes)
-* jeffzhkw:
-* Thaileaf:
+## Getting Started(Deprecated)
+1. Edit the `setup.sh` script, replace the environment variables accordingly as shown below. These can be found in the report. 
+
+   ```bash
+   echo "ATLAS_URI=__your_connection_string__" >> .env
+	echo "DISCORD_TOKEN=__your_discord_token__" >> .env
+	echo "GUILD_ID=__your_discord_server_id__" >> .env
+	echo "CLIENT_ID=__your_discord_client_id__" >> .env
+   echo "PORT=5000" >> .env
+   ```
+
+
+2. Install project dependencies using setup script:
+
+   ```bash
+   ./setup.sh
+   ```
+
+3. Fill in your Discord token and MongoDB key
+
+4. Start adding your JavaScript code to the `src` directory. You can create new files and modules under the `src` directory as needed.
+
+5. To expose your modules, update the `index.js` file in the root directory. For example:
+
+   ```javascript
+   import * as hello from './src/hello.js';
+   import * as yourNewModule from './src/yourNewModule.js'
+
+   export default {
+     hello,
+     yourNewModule
+   };
+   ```
 
 ## License
 
